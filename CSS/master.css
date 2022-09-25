@@ -1,0 +1,18 @@
+body{
+    background-color: #181818;
+    color: white;
+}
+#wrap{
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
+}
+#aufgabe2{
+    margin-top: 2rem;
+    width: 100%;
+}
+#displaydata{
+    max-width: 100%;
+    height: auto;
+    margin-top: 1rem;
+}
