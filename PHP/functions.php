@@ -2,6 +2,8 @@
     include "conn.php";
 
     function GetApiData(){
+        #Löschen der vorherigen Daten in der Datenbank um Redundanz der Daten zu vermeiden
+        ClearDatabse();
         $data = file_get_contents('https://ghibliapi.herokuapp.com/films');
         $obj = json_decode($data);
         foreach(array_slice($obj,0,10) as $name){
@@ -22,6 +24,7 @@
     }
 
     function AddToDB($movie,$descrip,$banner,$year,$duration){
+        #Einfügen der Daten in die Tabelle API_DATA
         $sql = "INSERT INTO API_DATA(title,description,banner,year,duration)VALUES('$movie','$descrip','$banner','$year','$duration')";
         $link = open_database_connection();
         if (!mysqli_query($link,$sql))
@@ -68,6 +71,19 @@
                 echo "</div>";
             }
             $link->close();
+        }
+    }
+
+    function ClearDatabse(){
+        $sql = "DELETE FROM API_DATA";
+        $link = open_database_connection();
+        if (!mysqli_query($link,$sql))
+        {
+            echo("Error description: " . mysqli_error($link));
+        }
+        else
+        {  
+            #echo "Daten Gelöscht";
         }
     }
 ?>
